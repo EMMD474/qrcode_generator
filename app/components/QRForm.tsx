@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from 'react'
-import { Sparkle, QrCode, Download, BadgeCheck, XCircle, Check } from 'lucide-react'
+import { QrCode, Download, BadgeCheck, XCircle, Check } from 'lucide-react'
 import { toast } from 'sonner'
 import QRCode from 'qrcode';
 import Image from 'next/image';
