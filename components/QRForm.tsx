@@ -92,132 +92,95 @@ const QRForm = () => {
   };
 
   return (
-    <section className="glass-panel rounded-[2rem] p-5 sm:p-7">
-      <div className="mb-6 flex items-center justify-between gap-4">
-        <div>
-          <p className="text-xs uppercase tracking-[0.26em] text-white/45">Generator</p>
-          <h2 className="mt-2 text-2xl font-semibold text-[#f8f1e7] sm:text-3xl">
-            Build your QR image
-          </h2>
-        </div>
-        <div className="rounded-2xl border border-white/10 bg-white/6 p-3 text-[#ffb08f]">
-          <QrCode className="h-6 w-6" />
-        </div>
-      </div>
-
-      <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-4 sm:p-5">
-        <div className="mb-4 flex items-center gap-3 text-sm text-white/62">
-          <Link2 className="h-4 w-4 text-[#43adc0]" />
-          Paste a destination, message, or any short shareable value.
-        </div>
-
-        <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-4">
-          <label className="text-sm font-medium text-[#f8f1e7]" htmlFor="qr-input">
-            Content
-          </label>
-          <div
-            className={`rounded-[1.25rem] border px-4 py-3 transition ${
-              inputError
-                ? "border-red-400/70 bg-red-500/8"
-                : "border-white/10 bg-[#0b1526]/80 focus-within:border-[#43adc0]/70"
-            }`}
-          >
-            <input
-              id="qr-input"
-              type="text"
-              placeholder="Enter text or URL"
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                if (inputError && e.target.value.trim() !== "") {
-                  setInputError(false);
-                }
-              }}
-              className="w-full bg-transparent text-base text-[#f8f1e7] outline-none placeholder:text-white/30"
-            />
+    <div className="glass-panel overflow-hidden rounded-3xl">
+      <div className="p-6 sm:p-8">
+        <form onSubmit={handleSubmit} noValidate className="space-y-6">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-gray-300" htmlFor="qr-input">
+              Enter URL or Text
+            </label>
+            <div
+              className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition-all duration-200 ${
+                inputError
+                  ? "border-red-500/50 bg-red-500/5"
+                  : "border-white/10 bg-black/20 focus-within:border-blue-500/50 focus-within:ring-1 focus-within:ring-blue-500/20"
+              }`}
+            >
+              <Link2 className="h-4 w-4 text-gray-500" />
+              <input
+                id="qr-input"
+                type="text"
+                placeholder="https://example.com"
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                  if (inputError && e.target.value.trim() !== "") {
+                    setInputError(false);
+                  }
+                }}
+                className="w-full bg-transparent text-base text-white outline-none placeholder:text-gray-600"
+              />
+            </div>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="submit"
               disabled={isGenerating}
-              className="inline-flex w-full items-center justify-center gap-2 rounded-[1.2rem] bg-[#f7f0e7] px-5 py-3 text-sm font-semibold text-[#07101d] transition hover:bg-[#fff7ef] disabled:cursor-wait disabled:opacity-70"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition hover:bg-blue-500 active:scale-[0.98] disabled:cursor-wait disabled:opacity-70"
             >
-              {isGenerating ? "Generating..." : "Generate code"}
+              {isGenerating ? "Generating..." : "Generate QR Code"}
               <ArrowRight className="h-4 w-4" />
             </button>
             <button
               type="button"
               onClick={clearForm}
-              className="inline-flex items-center justify-center rounded-[1.2rem] border border-white/10 bg-white/6 px-5 py-3 text-sm font-medium text-white/72 transition hover:bg-white/10"
+              className="inline-flex items-center justify-center rounded-xl border border-white/10 bg-white/5 px-5 py-3 text-sm font-medium text-gray-300 transition hover:bg-white/10 active:scale-[0.98]"
             >
               Reset
             </button>
           </div>
-
-          <p className="text-sm leading-6 text-white/45">
-            Works well for links, portfolio cards, event check-ins, and quick phone-to-phone sharing.
-          </p>
         </form>
-      </div>
 
-      <div className="mt-5 rounded-[1.75rem] border border-white/10 bg-[#091321]/90 p-5 sm:p-6">
-        <div className="mb-5 flex items-center justify-between gap-4">
-          <div>
-            <p className="text-xs uppercase tracking-[0.26em] text-white/40">Preview</p>
-            <h3 className="mt-2 text-lg font-medium text-[#f8f1e7]">Scan-ready output</h3>
-          </div>
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-2 text-xs uppercase tracking-[0.22em] text-white/55">
-            <ScanLine className="h-3.5 w-3.5" />
-            PNG Export
-          </div>
-        </div>
-
-        <div className="flex flex-col items-center justify-center rounded-[1.5rem] border border-dashed border-white/10 bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.08),_transparent_55%)] px-4 py-6 sm:px-8">
-          {qrCodeUrl ? (
-            <>
-              <div className="rounded-[1.65rem] bg-[#f7f0e7] p-4 shadow-[0_24px_70px_rgba(0,0,0,0.35)]">
-                <Image
-                  src={qrCodeUrl}
-                  alt="Generated QR code"
-                  width={280}
-                  height={280}
-                  unoptimized
-                  className="h-auto w-full max-w-[280px] rounded-[1.1rem]"
-                />
+        <div className="mt-8 border-t border-white/5 pt-8">
+          <div className="flex flex-col items-center justify-center min-h-[300px] rounded-2xl border border-dashed border-white/10 bg-white/[0.02] p-8">
+            {qrCodeUrl ? (
+              <div className="flex flex-col items-center space-y-6 animate-in fade-in zoom-in duration-300">
+                <div className="rounded-2xl bg-white p-4 shadow-2xl">
+                  <Image
+                    src={qrCodeUrl}
+                    alt="Generated QR code"
+                    width={240}
+                    height={240}
+                    unoptimized
+                    className="h-auto w-full max-w-[240px]"
+                  />
+                </div>
+                <button
+                  onClick={downloadQRCode}
+                  className="inline-flex items-center gap-2 rounded-xl bg-white/10 px-6 py-2.5 text-sm font-medium text-white transition hover:bg-white/20 active:scale-[0.98]"
+                >
+                  <Download className="h-4 w-4" />
+                  Download PNG
+                </button>
               </div>
-              <button
-                onClick={downloadQRCode}
-                className="mt-5 inline-flex items-center gap-2 rounded-[1.15rem] border border-white/10 bg-white/8 px-5 py-3 text-sm font-medium text-[#f8f1e7] transition hover:bg-white/12"
-              >
-                Download PNG
-                <Download className="h-4 w-4" />
-              </button>
-            </>
-          ) : (
-            <div className="flex min-h-[320px] flex-col items-center justify-center text-center">
-              <div className="mb-4 rounded-[1.4rem] border border-white/10 bg-white/6 p-4 text-[#43adc0]">
-                <QrCode className="h-8 w-8" />
+            ) : (
+              <div className="flex flex-col items-center text-center space-y-4 text-gray-500">
+                <div className="rounded-2xl bg-white/5 p-4">
+                  <QrCode className="h-8 w-8 opacity-40" />
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-gray-400">Preview Area</p>
+                  <p className="text-xs max-w-[200px]">
+                    Your generated QR code will appear here
+                  </p>
+                </div>
               </div>
-              <h4 className="text-xl font-medium text-[#f8f1e7]">
-                Your QR preview will appear here
-              </h4>
-              <p className="mt-3 max-w-xs text-sm leading-6 text-white/50">
-                Submit your content to render a high-contrast QR code optimized for quick
-                scanning.
-              </p>
-            </div>
-          )}
-        </div>
-
-        <div className="mt-5 flex items-center justify-between gap-3 rounded-[1.25rem] border border-white/10 bg-white/[0.03] px-4 py-3 text-sm text-white/52">
-          <span>High contrast layout for better scan reliability.</span>
-          <span className="font-mono text-xs uppercase tracking-[0.18em] text-white/38">
-            01 / Export
-          </span>
+            )}
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
