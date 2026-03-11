@@ -23,12 +23,12 @@ html {
 
 body {
   min-height: 100vh;
-  background: #030712;
+  background: #020617;
   color: var(--foreground);
   font-family: var(--font-space-grotesk), sans-serif;
   background-image: 
-    radial-gradient(at 0% 0%, rgba(59, 130, 246, 0.05) 0px, transparent 50%),
-    radial-gradient(at 100% 0%, rgba(16, 185, 129, 0.05) 0px, transparent 50%);
+    radial-gradient(at 0% 0%, rgba(30, 64, 175, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(15, 23, 42, 0.1) 0px, transparent 50%);
 }
 
 body::before {

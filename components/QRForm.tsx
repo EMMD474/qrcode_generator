@@ -91,7 +91,7 @@ const QRForm = () => {
 
         .qr-root {
           font-family: 'DM Mono', monospace;
-          background: #0f0f0f;
+          background: #020617; /* Navy midnight */
           min-height: 100vh;
           display: flex;
           align-items: center;
@@ -102,8 +102,8 @@ const QRForm = () => {
         .qr-card {
           width: 100%;
           max-width: 480px;
-          background: #141414;
-          border: 1px solid rgba(255,255,255,0.07);
+          background: #0f172a; /* Deep navy */
+          border: 1px solid rgba(148, 163, 184, 0.1);
           border-radius: 4px;
           overflow: hidden;
           position: relative;
@@ -182,14 +182,14 @@ const QRForm = () => {
 
         .input-wrap {
           position: relative;
-          border: 1px solid rgba(255,255,255,0.08);
+          border: 1px solid rgba(148, 163, 184, 0.15);
           border-radius: 2px;
           transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-          background: rgba(255,255,255,0.01);
+          background: rgba(15, 23, 42, 0.6);
         }
         .input-wrap:focus-within {
-          border-color: rgba(245,240,232,0.4);
-          background: rgba(255,255,255,0.03);
+          border-color: rgba(56, 189, 248, 0.4); /* Sky blue focus */
+          background: rgba(30, 41, 59, 0.8);
           box-shadow: 0 0 20px rgba(0,0,0,0.4);
         }
         .input-wrap.error {
@@ -244,8 +244,8 @@ const QRForm = () => {
           align-items: center;
           justify-content: center;
           gap: 10px;
-          background: #f5f0e8;
-          color: #0f0f0f;
+          background: #38bdf8; /* Sky blue primary */
+          color: #020617;
           border: none;
           border-radius: 2px;
           padding: 14px 18px;
@@ -259,9 +259,9 @@ const QRForm = () => {
           overflow: hidden;
         }
         .btn-generate:hover:not(:disabled) { 
-          background: #ffffff;
+          background: #7dd3fc;
           transform: translateY(-1px);
-          box-shadow: 0 4px 12px rgba(245,240,232,0.15);
+          box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
         }
         .btn-generate:active:not(:disabled) { 
           transform: translateY(0); 
@@ -345,8 +345,8 @@ const QRForm = () => {
           position: absolute;
           width: 100%;
           height: 2px;
-          background: linear-gradient(90deg, transparent, #f5f0e8, transparent);
-          box-shadow: 0 0 15px #f5f0e8;
+          background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+          box-shadow: 0 0 15px #38bdf8;
           top: 0;
           left: 0;
           z-index: 5;
@@ -484,9 +484,9 @@ const QRForm = () => {
           width: 6px;
           height: 6px;
           border-radius: 50%;
-          background: ${isGenerating ? '#facc15' : qrCodeUrl ? '#86efac' : 'rgba(245,240,232,0.15)'};
+          background: ${isGenerating ? '#facc15' : qrCodeUrl ? '#38bdf8' : 'rgba(148, 163, 184, 0.3)'};
           transition: all 0.4s ease;
-          box-shadow: ${qrCodeUrl && !isGenerating ? '0 0 12px rgba(134,239,172,0.5)' : 'none'};
+          box-shadow: ${qrCodeUrl && !isGenerating ? '0 0 12px rgba(56, 189, 248, 0.5)' : 'none'};
           animation: ${isGenerating ? 'pulse 1s infinite' : 'none'};
         }
 
