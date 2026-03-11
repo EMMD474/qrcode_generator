@@ -4,6 +4,8 @@
   --background: #06111f;
   --foreground: #f8f1e7;
   --border: rgba(248, 241, 231, 0.12);
+  --font-space-grotesk: "Avenir Next", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  --font-plex-mono: "SFMono-Regular", "Cascadia Code", "Liberation Mono", Consolas, monospace;
 }
 
 @theme inline {
